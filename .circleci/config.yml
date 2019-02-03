@@ -1,0 +1,28 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/algorithms-in-scala
+    docker:
+      - image: codestar/circleci-scala-sbt-git:scala-2.12.8-sbt-1.1.6
+    environment:
+      - SBT_VERSION: 1.2.1
+    steps:
+      - checkout
+      - restore_cache:
+          key: sbt-cache
+      - run:
+          name: Compile algorithms-in-scala and package
+          command: cat /dev/null | sbt clean update package
+      - store_artifacts:
+          path: target/universal/algorithms-in-scala.zip
+          destination: algorithms-in-scala
+      - save_cache:
+          key: sbt-cache
+          paths:
+            - "~/.ivy2/cache"
+            - "~/.sbt"
+            - "~/.m2"
+#      - deploy:
+#          command: |
+#            mv target/universal/circleci101.zip $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD
+#            aws s3 cp $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD s3://devops.datapunks.org/builds/samplescala/ --metadata {\"git_sha1\":\"$CIRCLE_SHA1\"}
