@@ -24,7 +24,7 @@ jobs:
             - "~/.m2"
       - deploy:
           command: |
-            mv target/universal/circleci101.zip $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD
+            mv target/universal/algorithms-in-scala.zip $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD
 #            aws s3 cp $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD s3://devops.datapunks.org/builds/samplescala/ --metadata {\"git_sha1\":\"$CIRCLE_SHA1\"}
 workflows:
   version: 2
