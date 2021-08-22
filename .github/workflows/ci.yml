@@ -1,4 +1,4 @@
-name: Algorithms In Scala - CI
+name: algorithms-in-scala
 
 on:
   push:
